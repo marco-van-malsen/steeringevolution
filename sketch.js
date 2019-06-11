@@ -25,6 +25,13 @@ function setup() {
 function draw() {
   background(0);
 
+  // show framecount(er)
+  fill(255);
+  stroke(0);
+  textAlign(RIGHT, TOP);
+  textSize(10);
+  text(frameCount, width, 0);
+
   if (random(1) < 0.1) createFood();
   if (random(1) < 0.01) createPoison();
 
