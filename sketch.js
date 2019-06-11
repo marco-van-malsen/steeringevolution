@@ -28,9 +28,9 @@ function draw() {
   // show framecount(er)
   fill(255);
   stroke(0);
-  textAlign(RIGHT, TOP);
+  textAlign(CENTER, TOP);
   textSize(10);
-  text(frameCount, width, 0);
+  text('frame: ' + frameCount + ', vehicles: ' + vehicles.length + ', food: ' + food.length + ', poison: ' + poison.length, width * 0.5, 0);
 
   if (random(1) < 0.1) createFood();
   if (random(1) < 0.01) createPoison();
