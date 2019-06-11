@@ -12,7 +12,7 @@
 var vehicles = [];
 var food = [];
 var poison = [];
-var debug = true;
+var debug = false;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
