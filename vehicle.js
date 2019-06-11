@@ -122,10 +122,12 @@ class Vehicle {
       ellipse(0, 0, this.dna[3] * 2);
     }
 
+    // linear interpolation of color between red (health = 0) and green (health = 1)
     var colG = color(0, 255, 0);
     var colR = color(255, 0, 0);
     var col = lerpColor(colR, colG, this.health);
 
+    // draw vehicle
     fill(col);
     stroke(col);
     strokeWeight(1);
@@ -135,6 +137,15 @@ class Vehicle {
     vertex(this.r, this.r * 2);
     endShape(CLOSE);
 
+    // draw health
+    if (debug) {
+      rotate(-angle);
+      fill(col);
+      stroke(0);
+      textAlign(CENTER, TOP);
+      textSize(10);
+      text(nf(this.health, 1, 3), 0, 10);
+    }
     pop();
   }
 
