@@ -1,12 +1,12 @@
 function createFood() {
-  var x = random(width);
-  var y = random(height);
+  var x = random(boundary, width - boundary);
+  var y = random(boundary, height - boundary);
   food.push(createVector(x, y));
 }
 
 function createPoison() {
-  var x = random(width);
-  var y = random(height);
+  var x = random(boundary, width - boundary);
+  var y = random(boundary, height - boundary);
   poison.push(createVector(x, y));
 }
 
