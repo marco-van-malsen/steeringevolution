@@ -9,10 +9,11 @@
 
 // https://editor.p5js.org/codingtrain/sketches/xgQNXkxx1
 
-var vehicles = [];
+var boundary = 25;
+var debug = false;
 var food = [];
 var poison = [];
-var debug = false;
+var vehicles = [];
 
 function setup() {
   createCanvas(windowWidth, windowHeight);

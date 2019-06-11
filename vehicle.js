@@ -68,18 +68,17 @@ class Vehicle {
   }
 
   boundaries() {
-    var d = 25;
     var desired = null;
 
-    if (this.position.x < d) {
+    if (this.position.x < boundary) {
       desired = createVector(this.maxspeed, this.velocity.y);
-    } else if (this.position.x > width - d) {
+    } else if (this.position.x > width - boundary) {
       desired = createVector(-this.maxspeed, this.velocity.y);
     }
 
-    if (this.position.y < d) {
+    if (this.position.y < boundary) {
       desired = createVector(this.velocity.x, this.maxspeed);
-    } else if (this.position.y > height - d) {
+    } else if (this.position.y > height - boundary) {
       desired = createVector(this.velocity.x, -this.maxspeed);
     }
 
