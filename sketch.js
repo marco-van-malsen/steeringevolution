@@ -25,13 +25,6 @@ function setup() {
 function draw() {
   background(0);
 
-  // show framecount(er)
-  fill(255);
-  stroke(0);
-  textAlign(CENTER, TOP);
-  textSize(10);
-  text('frame: ' + frameCount + ', vehicles: ' + vehicles.length + ', food: ' + food.length + ', poison: ' + poison.length, width * 0.5, 0);
-
   if (random(1) < 0.1) createFood();
   if (random(1) < 0.01) createPoison();
 
@@ -43,11 +36,14 @@ function draw() {
   noStroke();
   for (var p of poison) ellipse(p.x, p.y, 4);
 
+  var maxHealthNow = 0;
   for (var i = vehicles.length - 1; i >= 0; i--) {
     vehicles[i].boundaries();
     vehicles[i].behaviors(food, poison);
     vehicles[i].update();
     vehicles[i].draw();
+
+    maxHealthNow = max(maxHealthNow, vehicles[i].health);
 
     if (vehicles[i].cloneMe()) createVehicle();
 
@@ -56,4 +52,13 @@ function draw() {
       vehicles.splice(i, 1);
     }
   }
+
+  // show framecount(er)
+  fill(255);
+  stroke(0);
+  textSize(10);
+  textAlign(CENTER, TOP);
+  text('frame: ' + frameCount + ', vehicles: ' + vehicles.length + ', food: ' + food.length + ', poison: ' + poison.length, width * 0.5, 0);
+  textAlign(CENTER, BOTTOM);
+  text('health of healthiest vehicle: ' + nf(maxHealthNow, 1, 3), width * 0.5, height);
 }
