@@ -16,10 +16,32 @@ function createVehicle() {
   vehicles.push(new Vehicle(x, y));
 }
 
+function initUniverse() {
+  vehicles = [];
+  food = [];
+  poison = [];
+  for (var i = 0; i < 50; i++) createVehicle();
+  for (var i = 0; i < 40; i++) createFood();
+  for (var i = 0; i < 20; i++) createPoison();
+}
+
 function keyPressed() {
-  if (key === 'D' || key === 'd') debug = !debug;
+  if (vehicles.length > 0) {
+    if (key === 'D' || key === 'd') debug = !debug;
+  } else {
+    if (key = ' ') {
+      debug = false;
+      initUniverse();
+    }
+  }
+
 }
 
 function mousePressed() {
-  debug = !debug;
+  if (vehicles.length > 0) {
+    debug = !debug;
+  } else {
+    debug = false;
+    initUniverse();
+  }
 }

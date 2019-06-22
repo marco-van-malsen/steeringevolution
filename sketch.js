@@ -17,16 +17,11 @@ var vehicles = [];
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  for (var i = 0; i < 50; i++) createVehicle();
-  for (var i = 0; i < 40; i++) createFood();
-  for (var i = 0; i < 20; i++) createPoison();
+  initUniverse();
 }
 
 function draw() {
   background(0);
-
-  // stop when there are no more vehicles are alive
-  if (vehicles.length === 0) noLoop();
 
   if (random(1) < 0.1) createFood();
   if (random(1) < 0.01) createPoison();
