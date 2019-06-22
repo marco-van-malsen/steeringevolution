@@ -25,6 +25,9 @@ function setup() {
 function draw() {
   background(0);
 
+  // stop when there are no more vehicles are alive
+  if (vehicles.length === 0) noLoop();
+
   if (random(1) < 0.1) createFood();
   if (random(1) < 0.01) createPoison();
 
@@ -60,7 +63,7 @@ function draw() {
 
   // statistics at top of screen
   textAlign(CENTER, TOP);
-  text('vehicles: ' + vehicles.length + ', healthiest vehicle: ' + nf(maxHealthNow, 1, 3) + ', food: ' + food.length + ', poison: ' + poison.length, width * 0.5, 0);
+  text('vehicles: ' + vehicles.length + ', healthiest: ' + nf(maxHealthNow, 1, 2) + ', food: ' + food.length + ', poison: ' + poison.length, width * 0.5, 0);
 
   // show framerate in upper right corner
   textAlign(RIGHT, TOP);
