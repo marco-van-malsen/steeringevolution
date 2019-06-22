@@ -57,8 +57,17 @@ function draw() {
   fill(255);
   stroke(0);
   textSize(10);
+
+  // statistics at top of screen
   textAlign(CENTER, TOP);
-  text('frame: ' + frameCount + ', vehicles: ' + vehicles.length + ', food: ' + food.length + ', poison: ' + poison.length, width * 0.5, 0);
+  text('vehicles: ' + vehicles.length + ', healthiest vehicle: ' + nf(maxHealthNow, 1, 3) + ', food: ' + food.length + ', poison: ' + poison.length, width * 0.5, 0);
+
+  // show framerate in upper right corner
+  textAlign(RIGHT, TOP);
+  text(int(frameRate()) + ' FPS', width, 0);
+
+  // show age of univerise bottom center of screen
   textAlign(CENTER, BOTTOM);
-  text('health of healthiest vehicle: ' + nf(maxHealthNow, 1, 3), width * 0.5, height);
+  text('age of universe: ' + nf(millis() / 1000, 1, 2) + 's', width * 0.5, height);
+
 }
