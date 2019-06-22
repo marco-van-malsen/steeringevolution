@@ -107,6 +107,7 @@ class Vehicle {
     translate(this.position.x, this.position.y);
     rotate(angle);
 
+    // draw debug information
     if (debug) {
       noFill();
       strokeWeight(2);
@@ -114,12 +115,12 @@ class Vehicle {
       // draw food attraction and perception radius
       stroke(0, 255, 0, 127);
       line(0, 0, 0, -this.dna[0] * 25);
-      ellipse(0, 0, this.dna[2] * 2);
+      arc(0, 0, this.dna[2] * 2, this.dna[2] * 2, -HALF_PI + radians(-30), -HALF_PI + radians(30), PIE);
 
       // draw poison attraction and perception radius
       stroke(255, 0, 0, 127);
       line(0, 0, 0, -this.dna[1] * 25);
-      ellipse(0, 0, this.dna[3] * 2);
+      arc(0, 0, this.dna[3] * 2, this.dna[3] * 2, -HALF_PI + radians(-30), -HALF_PI + radians(30), PIE);
     }
 
     // linear interpolation of color between red (health = 0) and green (health = 1)
