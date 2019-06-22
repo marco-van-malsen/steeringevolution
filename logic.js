@@ -19,3 +19,7 @@ function createVehicle() {
 function keyPressed() {
   if (key === 'D' || key === 'd') debug = !debug;
 }
+
+function mousePressed() {
+  debug = !debug;
+}
