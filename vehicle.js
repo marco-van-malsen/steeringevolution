@@ -8,25 +8,25 @@
 // Part 5: https://youtu.be/VnFF5V5DS8s
 
 // https://editor.p5js.org/codingtrain/sketches/xgQNXkxx1
-
+// vehicle class
 class Vehicle {
   constructor(x, y, dna) {
-    this.acceleration = createVector(0, 0);
-    this.health = 1;
-    this.maxforce = 0.5;
-    this.maxspeed = 5;
-    this.position = createVector(x, y);
-    this.r = 4;
-    this.velocity = createVector(0, -2);
+    this.acceleration = createVector(0, 0); // acceleration
+    this.health = 1; // initial health, vehicle dies when health reaches zero
+    this.maxforce = 0.5; // maximum force for steering
+    this.maxspeed = 5; // maximum speed in pixels per frame
+    this.position = createVector(x, y); // initial position
+    this.r = 4; // size
+    this.velocity = createVector(0, -2); // velocity pixels per frame
 
     var mr = 0.01; // mutation ratio
 
-    this.dna = [];
+    this.dna = []; // dna
     if (dna === undefined) {
-      this.dna[0] = random(-2, 2); // Food weight
-      this.dna[1] = random(-2, 2); // Poison weight
-      this.dna[2] = random(0, 100); // Food perception
-      this.dna[3] = random(0, 100); // Poison perception
+      this.dna[0] = random(-2, 2); // food weight
+      this.dna[1] = random(-2, 2); // poison weight
+      this.dna[2] = random(0, 100); // food perception
+      this.dna[3] = random(0, 100); // poison perception
 
     } else {
       // Mutation
@@ -52,10 +52,12 @@ class Vehicle {
     }
   }
 
+  // apply force from based on steering towards or away from food/poison
   applyForce(force) {
     this.acceleration.add(force);
   }
 
+  // use dna to control vehicle
   behaviors(good, bad) {
     var steerG = this.eat(good, 0.2, this.dna[2]);
     var steerB = this.eat(bad, -1, this.dna[3]);
@@ -67,6 +69,7 @@ class Vehicle {
     this.applyForce(steerB);
   }
 
+  // boundary where no food and poison will be create and vehicles will steer away from
   boundaries() {
     var desired = null;
 
@@ -91,15 +94,17 @@ class Vehicle {
     }
   }
 
+  // clone vehicle at random
   cloneMe() {
     return (random(1) < 0.002)
   }
 
+  // check vehicle's health 
   dead() {
-    return (this.health < 0)
+    return (this.health <= 0)
   }
 
-  // Draw vehicle
+  // draw vehicle
   draw() {
     var angle = this.velocity.heading() + PI / 2;
 
@@ -150,6 +155,7 @@ class Vehicle {
     pop();
   }
 
+  // ead something (food or poison)
   eat(list, nutrition, perception) {
     var record = Infinity;
     var closest = null;
@@ -175,8 +181,8 @@ class Vehicle {
     return createVector(0, 0);
   }
 
-  // A method that calculates a steering force towards a target
-  // STEER = DESIRED MINUS VELOCITY
+  // a method that calculates a steering force towards a target
+  // STEER = DESIRED - VELOCITY
   seek(target) {
     var desired = p5.Vector.sub(target, this.position); // A vector pointing from the location to the target
 
@@ -190,7 +196,7 @@ class Vehicle {
     return steer;
   }
 
-  // Method to update location
+  // update location
   update() {
     this.health -= 0.005;
     this.velocity.add(this.acceleration); // Update velocity
