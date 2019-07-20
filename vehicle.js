@@ -117,15 +117,19 @@ class Vehicle {
       noFill();
       strokeWeight(2);
 
+      // determine angles for perception radii
+      let angleGood = (this.dna[2] > this.dna[3] ? 30 : 15);
+      let angleBad = (this.dna[2] > this.dna[3] ? 15 : 30);
+
       // draw food attraction and perception radius
       stroke(0, 255, 0, 127);
       line(0, 0, 0, -this.dna[0] * 25);
-      arc(0, 0, this.dna[2] * 2, this.dna[2] * 2, -HALF_PI + radians(-30), -HALF_PI + radians(30), PIE);
+      arc(0, 0, this.dna[2] * 2, this.dna[2] * 2, -HALF_PI + radians(-angleGood), -HALF_PI + radians(angleGood), PIE);
 
       // draw poison attraction and perception radius
       stroke(255, 0, 0, 127);
       line(0, 0, 0, -this.dna[1] * 25);
-      arc(0, 0, this.dna[3] * 2, this.dna[3] * 2, -HALF_PI + radians(-30), -HALF_PI + radians(30), PIE);
+      arc(0, 0, this.dna[3] * 2, this.dna[3] * 2, -HALF_PI + radians(-angleBad), -HALF_PI + radians(angleBad), PIE);
     }
 
     // linear interpolation of color between red (health = 0) and green (health = 1)

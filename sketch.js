@@ -77,5 +77,4 @@ function draw() {
   // show age of univerise bottom center of screen
   textAlign(CENTER, BOTTOM);
   text('age of universe: ' + nf(millis() / 1000, 1, 2) + 's', width * 0.5, height);
-
 }
