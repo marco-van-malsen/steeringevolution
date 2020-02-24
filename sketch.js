@@ -66,15 +66,32 @@ function draw() {
   stroke(0);
   textSize(10);
 
-  // show vehicle, food and poison stats in top center of screen
+  // show vehicle, food and poison stats in upper left corner
+  textAlign(LEFT, TOP);
+  text('vehicles:\nhealthiest:\nfood:\npoison:\nage:', 0, 0);
+  text(vehicles.length + '\n' + nf(maxHealthNow, 1, 2) + '\n' + food.length + '\n' + poison.length + '\n' + nf(millis() / 1000, 1, 2) + 's', 50, 0);
+
+  // show title in top center of screen
   textAlign(CENTER, TOP);
-  text('vehicles: ' + vehicles.length + ', healthiest: ' + nf(maxHealthNow, 1, 2) + ', food: ' + food.length + ', poison: ' + poison.length, width * 0.5, 0);
+  text('STEERING EVOLUTION', width * 0.5, 0);
 
   // show framerate in upper right corner
   textAlign(RIGHT, TOP);
   text(int(frameRate()) + ' FPS', width, 0);
+}
 
-  // show age of univerise bottom center of screen
-  textAlign(CENTER, BOTTOM);
-  text('age of universe: ' + nf(millis() / 1000, 1, 2) + 's', width * 0.5, height);
+// responsive UI
+function windowResized() {
+  // resize canvas
+  resizeCanvas(windowWidth, windowHeight);
+
+  // remove invisible food
+  for (let i = food.length - 1; i > 0; i--) {
+    if (food[i].x < 0 || food[i].x > windowWidth || food[i].y < 0 || food[i].y > windowHeight) food.splice(i);
+  }
+
+  // remove invisible poison
+  for (let i = poison.length - 1; i > 0; i--) {
+    if (poison[i].x < 0 || poison[i].x > windowWidth || poison[i].y < 0 || poison[i].y > windowHeight) poison.splice(i);
+  }
 }
